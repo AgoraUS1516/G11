@@ -388,5 +388,24 @@ public class CensusService {
 		
 	}
 	
+	//METODOS NUEVOS
+	
+	public Collection<Census> canDelete(String username){
+		Collection<Census> result;
+		Collection<Census> aux;
+		
+		result = new ArrayList<Census>();
+		
+		aux = censusRepository.findCensusByCreator(username);
+		
+		for(Census c: aux){
+			if(c.getVoto_por_usuario().isEmpty()){
+				result.add(c);
+			}
+		}
+		
+		return result;
+	}
+	
 }
 

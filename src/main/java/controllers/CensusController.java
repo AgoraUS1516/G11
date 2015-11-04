@@ -300,5 +300,14 @@ public class CensusController extends AbstractController {
 		 return res;
 	 }  */
 	
+	//NUEVOS METODOS
+	
+	/*Devuelve JSon a usuario de los censos que puede borrar (puede coger la id de la votacion y asi saber 
+	que votaciones puede borrar)*/
+	@RequestMapping(value = "/listCanDelete", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> listCanDelete(@CookieValue("user") String username){
+		return censusService.canDelete(username);
+	}
+	
 }	
 	

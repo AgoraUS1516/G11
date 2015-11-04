@@ -28,5 +28,5 @@
 
 
 <script type="text/javascript">
-	document.cookie = "user=usuario";
+	document.cookie = "user=juan22";	
 </script>
