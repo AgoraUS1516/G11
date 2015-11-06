@@ -447,5 +447,35 @@ public class CensusService {
 		
 		return result;
 	}
+	
+	public Collection<String> findPeopleHasVoted(int idVotacion){
+		Collection<String> res = new ArrayList<String>();
+		//Obtenemos el Censo de la votación
+		Census c = censusRepository.findCensusByVote(idVotacion);
+		
+		//Recorremos la lista de nombres viendo los que han votado
+		for(String v : c.getVoto_por_usuario().keySet()){
+			//Si han votado añadimos el nombre al resultado
+			if(c.getVoto_por_usuario().get(v)){
+				res.add(v);
+			}
+		}
+		return res;
+	}
+	
+	public Collection<String> findPeopleHasNotVoted(int idVotacion){
+		Collection<String> res = new ArrayList<String>();
+		//Obtenemos el Censo de la votación
+		Census c = censusRepository.findCensusByVote(idVotacion);
+		
+		//Recorremos la lista de nombres viendo los que han votado
+		for(String v : c.getVoto_por_usuario().keySet()){
+			//Si no han votado añadimos el nombre al resultado
+			if(!c.getVoto_por_usuario().get(v)){
+				res.add(v);
+			}
+		}
+		return res;
+	}
 }
 
