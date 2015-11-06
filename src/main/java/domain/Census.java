@@ -30,7 +30,8 @@ public class Census extends DomainEntity{
 	private HashMap<String, Boolean> voto_por_usuario = new HashMap<String, Boolean>();//Mapa encargado de asignar un true o false (ha votado o no) a un token unico de un usuario
 	private Date fechaInicioVotacion;//Fecha en la que se inicia la votacion
 	private Date fechaFinVotacion;//Fecha en la que finaliza la votacion
-	
+	//New attribute
+	private boolean open = false; // Si este atributo es verdadero, significa que el censo pertenece a una votacion en la cual se permite cambiar tu voto.
 	
 	public Census(){
 		
@@ -94,6 +95,16 @@ public class Census extends DomainEntity{
 
 	public void setFechaFinVotacion(Date fechaFinVotacion) {
 		this.fechaFinVotacion = fechaFinVotacion;
+	}
+	
+	//Nuevo atributo 
+	public boolean getOpen(){
+		return this.open;
+	}
+	
+	public void setOpen(Boolean bool){
+		
+		this.open = bool;
 	}
 
 	

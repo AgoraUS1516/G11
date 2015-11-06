@@ -126,7 +126,8 @@ public class CensusService {
 		Census c = findCensusByVote(idVotacion);
 		
 		if(c != null && c.getVoto_por_usuario().containsKey(username)){
-			if(!c.getVoto_por_usuario().get(username)){
+			//Modificacion del codigo del año pasado, añadiendo la comprobación de que si el censo es abierto, se puede volver a votar.
+			if(!c.getVoto_por_usuario().get(username) || c.getOpen()){
 				res = "{\"result\":\"yes\"}";
 				
 			}else{
@@ -407,5 +408,44 @@ public class CensusService {
 		return result;
 	}
 	
+	public Collection<Census> allCensusForPerson(String username){
+		Collection<Census> result;
+		Collection<Census> aux;
+		
+		result = new ArrayList<Census>();
+		
+		aux = censusRepository.findAll();  //Obtenemos todos los censos creados hasta la fecha
+		
+
+		for(Census census: aux){
+			HashMap<String, Boolean> mapaUsuarios = census.getVoto_por_usuario();
+			
+			if(mapaUsuarios.containsKey(username)){ // Se comprueba que el usuario pasado por parametros este contenido en el censo.
+				result.add(census);
+			}
+		}
+		
+		return result;
+	}
+	
+	public Collection<Census> allCensusCanVote(String username){
+		Collection<Census> result;
+		Collection<Census> aux;
+		String voteCanVote = "{\"result\":\"yes\"}";
+		result = new ArrayList<Census>();
+		
+		aux = censusRepository.findAll();  //Obtenemos todos los censos creados hasta la fecha
+		
+
+		for(Census census: aux){
+			HashMap<String, Boolean> mapaUsuarios = census.getVoto_por_usuario();
+			
+			if(mapaUsuarios.containsKey(username) && voteCanVote.equals(canVote(census.getIdVotacion(), username))){ // Se comprueba que el usuario pasado por parametros este contenido en el censo. Y que pueda votar
+				result.add(census);
+			}
+		}
+		
+		return result;
+	}
 }
 

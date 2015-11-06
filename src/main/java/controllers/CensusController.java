@@ -308,6 +308,16 @@ public class CensusController extends AbstractController {
 	public @ResponseBody Collection<Census> listCanDelete(@CookieValue("user") String username){
 		return censusService.canDelete(username);
 	}
+	//Devuelve los censos pertenecientes al usuario
+	@RequestMapping(value = "/listCensusForUser", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> listCensusForUser(@CookieValue("user") String username){
+		return censusService.findCensusByUser(username);
+	}
+	
+	@RequestMapping(value = "/listCensusWhichUserCanVote", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> listCensusWhichUserCanVote(@CookieValue("user") String username){
+		return censusService.allCensusCanVote(username);
+	}
 	
 }	
 	
