@@ -26,7 +26,9 @@
 					<li><a target="_blank" href="census/findCensusByVote.do?idVotacion=1"><spring:message code="master.page.census.fomdUserByCensus" /></a></li> 
 					<li><a target="_blank" href="census/listCensusForUser.do"><spring:message code="master.page.census.findCensusByUser" /></a></li> 
 					<li><a target="_blank" href="census/listCensusWhichUserCanVote.do"><spring:message code="master.page.census.allCensusCanVote" /></a></li> 
-					<li><a target="_blank" href="census/listCanDelete.do"><spring:message code="master.page.census.listCanDelete" /></a></li> 
+					<li><a target="_blank" href="census/listCanDelete.do"><spring:message code="master.page.census.listCanDelete" /></a></li>
+					<li><a target="_blank" href="census/findUsersWhoHaveVoted.do?idVotacion=1"><spring:message code="master.page.census.usersHaveVoted" /></a></li>
+					<li><a target="_blank" href="census/findUsersWhoHaveNotVoted.do?idVotacion=1"><spring:message code="master.page.census.usersHaveNotVoted" /></a></li>
 				</ul>
 			</li>
 			

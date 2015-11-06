@@ -320,15 +320,15 @@ public class CensusController extends AbstractController {
 	}
 	
 	//Devuelve un censo con los usuarios que ya han votado en dicho censo
-	@RequestMapping(value = "/findUsersHaveVoted", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody Collection<String> findUsersHaveVoted(@RequestParam int idVotacion){
-		return censusService.findPeopleHasVoted(idVotacion);
+	@RequestMapping(value = "/findUsersWhoHaveVoted", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<String> findUsersWhoHaveVoted(@RequestParam int idVotacion){
+		return censusService.findPeopleWhoHasVoted(idVotacion);
 	}
 	
 	//Devuelve un censo con los usuarios que ya han votado en dicho censo
-	@RequestMapping(value = "/findUsersHaveNotVoted", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody Collection<String> findUsersHaveNotVoted(@RequestParam int idVotacion){
-		return censusService.findPeopleHasNotVoted(idVotacion);
+	@RequestMapping(value = "/findUsersWhoHaveNotVoted", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<String> findUsersWhoHaveNotVoted(@RequestParam int idVotacion){
+		return censusService.findPeopleWhoHasNotVoted(idVotacion);
 	}
 	
 }	

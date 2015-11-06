@@ -448,7 +448,7 @@ public class CensusService {
 		return result;
 	}
 	
-	public Collection<String> findPeopleHasVoted(int idVotacion){
+	public Collection<String> findPeopleWhoHasVoted(int idVotacion){
 		Collection<String> res = new ArrayList<String>();
 		//Obtenemos el Censo de la votación
 		Census c = censusRepository.findCensusByVote(idVotacion);
@@ -463,7 +463,7 @@ public class CensusService {
 		return res;
 	}
 	
-	public Collection<String> findPeopleHasNotVoted(int idVotacion){
+	public Collection<String> findPeopleWhoHasNotVoted(int idVotacion){
 		Collection<String> res = new ArrayList<String>();
 		//Obtenemos el Censo de la votación
 		Census c = censusRepository.findCensusByVote(idVotacion);
