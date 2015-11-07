@@ -331,5 +331,11 @@ public class CensusController extends AbstractController {
 		return censusService.findPeopleWhoHasNotVoted(idVotacion);
 	}
 	
+	//Devuelve si en un censo donde hayan votado todos los usuarios, o un no en el caso de que alguno no haya votado
+	@RequestMapping(value = "/CensusWhereAllUsersVoted", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody String CensusWhereAllUsersVoted(@RequestParam int idVotacion){
+		return censusService.CensusWhereAllUsersVoted(idVotacion);
+	}
+	
 }	
 	

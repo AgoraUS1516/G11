@@ -477,5 +477,22 @@ public class CensusService {
 		}
 		return res;
 	}
+	
+	//Metodo para saber si todos los votantes de un censo han votado
+	public String CensusWhereAllUsersVoted(int idVotacion){
+		String allVoted = "Yes";
+		
+		//Obtenemos el Censo de la votación
+		Census c = censusRepository.findCensusByVote(idVotacion);
+		
+		//Recorremos el censo y miramos si todos los votantes han votado
+		for(String u: c.getVoto_por_usuario().keySet()){
+			//En el caso de que algun usuario no haya votado se devuelve no
+			if(c.getVoto_por_usuario().get(u) == false){
+				allVoted = "No";
+			}
+		}
+		return allVoted;
+	}
 }
 
