@@ -337,5 +337,16 @@ public class CensusController extends AbstractController {
 		return censusService.CensusWhereAllUsersVoted(idVotacion);
 	}
 	
+	//Devuelve si se ha abierto el censo o no
+	@RequestMapping(value = "/openCensus", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody String openCensus(@RequestParam int idVotacion){
+		return censusService.openCensus(idVotacion);
+	}
+	
+	//Devuelve si se ha cerrado el censo o no
+	@RequestMapping(value = "/closeCensus", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody String closeCensus(@RequestParam int idVotacion){
+		return censusService.closeCensus(idVotacion);
+	}
 }	
 	

@@ -69,6 +69,33 @@ public class CensusService {
 		return c;
 	}
 	
+	//Método para crear un censo e indicar si la votación es abierta o cerrada
+	public Census create(int idVotacion, String username,String fecha_inicio,String fecha_fin, String tituloVotacion, boolean open ) throws ParseException{ 
+		Assert.isTrue(!username.equals(""));
+		Census c = new Census();
+		long start_date = Long.parseLong(fecha_inicio);
+		long finish_date = Long.parseLong(fecha_fin);
+
+		
+		Date fecha_comienzo = new Date(start_date);
+		Date fecha_final = new Date(finish_date);
+		
+		Assert.isTrue(fecha_comienzo.before(fecha_final));
+		
+		c.setFechaFinVotacion(fecha_final);
+		c.setFechaInicioVotacion(fecha_comienzo);
+		
+		c.setIdVotacion(idVotacion);
+		c.setTituloVotacion(tituloVotacion);
+		c.setUsername(username);
+		HashMap<String, Boolean> vpo = new HashMap<String, Boolean>();
+		c.setVoto_por_usuario(vpo);		
+		
+		c.setOpen(open);
+					
+		return c;
+	}
+	
 	
 	/***
 	 * Metodo utilizado por cabina para actualizar el estado de voto de un usuario
@@ -493,6 +520,44 @@ public class CensusService {
 			}
 		}
 		return allVoted;
+	}
+	
+	/*14 NOVIEMBRE*/
+	
+	//Metodo para abrir un censo que solo permite votar una vez para poder cambiar el voto
+	public String openCensus(int idVotacion){
+		Census c;
+		String result;
+		//Obtenemos el Censo de la votación
+		c = censusRepository.findCensusByVote(idVotacion);
+		
+		if(!c.getOpen()){
+			c.setOpen(true);
+			save(c);
+			result = "{\"result\":\"yes\"}";
+		}else{
+			result = "{\"result\":\"no\"}";
+		}
+		
+		return result;
+	}
+	
+	//Metodo para cerrar un censo para que solo permita votar una vez 
+	public String closeCensus(int idVotacion){
+		Census c;
+		String result;
+		//Obtenemos el Censo de la votación
+		c = censusRepository.findCensusByVote(idVotacion);
+		
+		if(c.getOpen()){
+			c.setOpen(false);
+			save(c);
+			result = "{\"result\":\"yes\"}";
+		}else{
+			result = "{\"result\":\"no\"}";
+		}
+		
+		return result;
 	}
 }
 

@@ -70,7 +70,7 @@ public class CreateCensues {
 		censusService.save(c);
 		
 		
-		Census c2= censusService.create(2, "juan22", "1416502444473", "1916502444473", "votacion prueba2");
+		Census c2= censusService.create(2, "juan22", "1416502444473", "1916502444473", "votacion prueba2", true);
 		
 		HashMap<String, Boolean> vpo2 = c.getVoto_por_usuario();
 		
