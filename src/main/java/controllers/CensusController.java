@@ -368,6 +368,12 @@ public class CensusController extends AbstractController {
 	public @ResponseBody Collection<Census> findExpiredCensusByCreator(@CookieValue("user") String username){
 		return censusService.findExpiredCensusByCreator(username);
 	}
+	
+	//Devuelve un censo sin los usuarios de la lista que se le haya pasado por parametros
+	@RequestMapping(value = "/deleteAllUsersFromAList", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Census deleteAllUsersFromAList(@RequestParam int idVotacion, @RequestParam Collection<String> usersToDelete){
+		return censusService.deleteAllUsersFromAList(idVotacion,usersToDelete);
+	}
 
 }	
 	

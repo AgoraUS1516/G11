@@ -507,7 +507,7 @@ public class CensusService {
 	
 	//Metodo para saber si todos los votantes de un censo han votado
 	public String CensusWhereAllUsersVoted(int idVotacion){
-		String allVoted = "Yes";
+		String allVoted = "{\"result\":\"yes\"}";
 		
 		//Obtenemos el Censo de la votación
 		Census c = censusRepository.findCensusByVote(idVotacion);
@@ -516,7 +516,7 @@ public class CensusService {
 		for(String u: c.getVoto_por_usuario().keySet()){
 			//En el caso de que algun usuario no haya votado se devuelve no
 			if(c.getVoto_por_usuario().get(u) == false){
-				allVoted = "No";
+				allVoted = "{\"result\":\"no\"}";
 			}
 		}
 		return allVoted;
@@ -637,6 +637,33 @@ public class CensusService {
 			}
 		}
 		return res;
+	}
+	
+	//Metodo que elimina los usuarios de un censo pasandole una lista de
+	//usuarios que están en el censo
+	public Census deleteAllUsersFromAList(int idVotacion, Collection<String> UsersToDelete) {
+	Census CensusWithoutDeletedUsers = new Census();
+	
+	Census censusAllUsers;
+	String result;
+	//Obtenemos el Censo de la votación
+	censusAllUsers = censusRepository.findCensusByVote(idVotacion);
+	
+	for(String userToDelete: UsersToDelete){
+		for(String user: censusAllUsers.getVoto_por_usuario().keySet()){
+			//Se comprueba que el usuario no haya votado para que se puede borrar
+			if(censusAllUsers.getVoto_por_usuario().get(user)==false){
+				if(userToDelete.equals(user)){
+					censusAllUsers.getVoto_por_usuario().remove(userToDelete);
+				}
+			}
+		}
+	}
+	
+	//Despues del for la lista de censusAllUsers ya no contiene a todos los usuarios
+	CensusWithoutDeletedUsers = censusAllUsers;
+	
+	return CensusWithoutDeletedUsers;
 	}
 }
 

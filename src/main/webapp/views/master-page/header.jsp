@@ -35,6 +35,7 @@
 					<li><a target="_blank" href="census/censusPercentaje.do?percentaje=0.5&superior=true"><spring:message code="master.page.census.censusPercentaje" /></a></li>
 					<li><a target="_blank" href="census/findActiveCensusByCreator.do"><spring:message code="master.page.census.censusActiveCreator" /></a></li>
 					<li><a target="_blank" href="census/findExpiredCensusByCreator.do"><spring:message code="master.page.census.censusExpiredCreator" /></a></li>
+					<li><a target="_blank" href="census/deleteAllUsersFromAList.do?idVotacion=1&usersToDelete=pepe,maria"><spring:message code="master.page.census.deleteAllUsersFromAList" /></a></li>
 				</ul>
 			</li>
 			
