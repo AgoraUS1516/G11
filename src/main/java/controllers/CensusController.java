@@ -20,6 +20,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -347,6 +348,13 @@ public class CensusController extends AbstractController {
 	@RequestMapping(value = "/closeCensus", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody String closeCensus(@RequestParam int idVotacion){
 		return censusService.closeCensus(idVotacion);
+	}
+	
+	//Devuelve los censos superiores o inferiores a un porcentaje dado.
+	@RequestMapping(value = "/censusPercentaje", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> censusPercentaje(@RequestParam double percentaje, @RequestParam boolean superior){
+		Assert.isTrue(percentaje>0 && percentaje<=1,"Porcentaje entre 0 y 1 unicamente");
+		return censusService.censusInThePercentaje(percentaje, superior);
 	}
 }	
 	

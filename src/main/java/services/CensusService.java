@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -558,6 +559,51 @@ public class CensusService {
 		}
 		
 		return result;
+	}
+	
+	//Devolveremos los censos que cumplen un porcentaje entre 0 y 1. Si nuestro boleano es true devolvera censos mayores que el porcentaje, si es false dara
+	//los inferiores
+	public Collection<Census> censusInThePercentaje(double percentaje,boolean superior){
+		Collection<Census> res = new ArrayList<Census>();
+		Collection<Census> allCensus = findAll();
+		int participations = 0;
+		int totalPeopleInCensus = 0;
+		//Primero vamos a obtener el total de personas de cada censo y su total de participacion
+		
+		for(Census census : allCensus){
+			Collection<Boolean> allVotes = census.getVoto_por_usuario().values();//obtenemos todos los votos de ese censo, si son false es que no se ha votado.
+			
+			for(Boolean bol : allVotes){
+				totalPeopleInCensus++;//por cada voto sumamos este parametro, el cual nos dara el total de gente que habia en el censo
+				
+				if(bol){// si el voto es true significa que esa persona ha votado con lo cual sumaremos un voto mas a nuestro total
+					participations++;
+					
+				}
+				
+			}
+			double resultado = participations*1.0/totalPeopleInCensus*1.0;//obtenemos ya el porcentaje de participacion
+			
+			//reseteamos valores iniciales para el siguiente censo
+			participations  = 0;
+			totalPeopleInCensus = 0;
+			
+			//Si queremos que los censos sean superiores o igual al porcentaje dado:
+			if(superior){
+				if(resultado >= percentaje){
+					res.add(census);
+				}
+			}
+			//si queremos que los censos sean inferiores al porcentaje dado
+			else if(!superior){
+				if(resultado<= percentaje){
+					res.add(census);
+				}
+			}
+		}
+		
+		
+		return res;
 	}
 }
 
