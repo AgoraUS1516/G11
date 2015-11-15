@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -603,6 +602,40 @@ public class CensusService {
 		}
 		
 		
+		return res;
+	}
+	
+	//Metodo que devuelve los censos activos (aun no ha llegado el final de la 
+	//votación) de un mismo creador
+	public Collection<Census> findActiveCensusByCreator(String username) {
+		//Conseguimos la lista de todos los censos del creador
+		Collection<Census> cs = censusRepository.findCensusByCreator(username);	
+		//Inicializamos la variable resultado
+		Collection<Census> res = new ArrayList<Census>();
+		//Recorremos la lista buscando aquellos cuya fecha de fin sea
+		//posterior al dia de hoy
+		for(Census c : cs){
+			if(c.getFechaFinVotacion().after(new Date())){
+				res.add(c);
+			}
+		}
+		return res;
+	}
+	
+	//Metodo que devuelve los censos no activos (la fecha de fin ya ha pasado)
+	//de un mismo creador
+	public Collection<Census> findExpiredCensusByCreator(String username) {
+		//Conseguimos la lista de todos los censos del creador
+		Collection<Census> cs = censusRepository.findCensusByCreator(username);	
+		//Inicializamos la variable resultado
+		Collection<Census> res = new ArrayList<Census>();
+		//Recorremos la lista buscando aquellos cuya fecha de fin sea
+		//anterior al dia de hoy
+		for(Census c : cs){
+			if(c.getFechaFinVotacion().before(new Date())){
+				res.add(c);
+			}
+		}
 		return res;
 	}
 }

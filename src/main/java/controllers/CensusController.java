@@ -356,5 +356,18 @@ public class CensusController extends AbstractController {
 		Assert.isTrue(percentaje>0 && percentaje<=1,"Porcentaje entre 0 y 1 unicamente");
 		return censusService.censusInThePercentaje(percentaje, superior);
 	}
+	
+	//Devuelve una lista con los censos activos de un usuario creador
+	@RequestMapping(value = "/findActiveCensusByCreator", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> findCensusByCreator(@CookieValue("user") String username){
+		return censusService.findActiveCensusByCreator(username);
+	}
+		
+	//Devuelve una lista con los censos activos de un usuario creador
+	@RequestMapping(value = "/findExpiredCensusByCreator", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Census> findExpiredCensusByCreator(@CookieValue("user") String username){
+		return censusService.findExpiredCensusByCreator(username);
+	}
+
 }	
 	
