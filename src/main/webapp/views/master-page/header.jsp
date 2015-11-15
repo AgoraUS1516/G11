@@ -33,6 +33,8 @@
 					<li><a target="_blank" href="census/openCensus.do?idVotacion=1"><spring:message code="master.page.census.openCensus" /></a></li>
 					<li><a target="_blank" href="census/closeCensus.do?idVotacion=2"><spring:message code="master.page.census.closeCensus" /></a></li>
 					<li><a target="_blank" href="census/censusPercentaje.do?percentaje=0.5&superior=true"><spring:message code="master.page.census.censusPercentaje" /></a></li>
+					<li><a target="_blank" href="census/findActiveCensusByCreator.do"><spring:message code="master.page.census.censusActiveCreator" /></a></li>
+					<li><a target="_blank" href="census/findExpiredCensusByCreator.do"><spring:message code="master.page.census.censusExpiredCreator" /></a></li>
 				</ul>
 			</li>
 			
