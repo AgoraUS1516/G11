@@ -650,12 +650,9 @@ public class CensusService {
 	censusAllUsers = censusRepository.findCensusByVote(idVotacion);
 	
 	for(String userToDelete: UsersToDelete){
-		for(String user: censusAllUsers.getVoto_por_usuario().keySet()){
-			//Se comprueba que el usuario no haya votado para que se puede borrar
-			if(censusAllUsers.getVoto_por_usuario().get(user)==false){
-				if(userToDelete.equals(user)){
-					censusAllUsers.getVoto_por_usuario().remove(userToDelete);
-				}
+		if(censusAllUsers.getVoto_por_usuario().containsKey(userToDelete)){
+			if(censusAllUsers.getVoto_por_usuario().get(userToDelete)== false){
+				censusAllUsers.getVoto_por_usuario().remove(userToDelete);
 			}
 		}
 	}
