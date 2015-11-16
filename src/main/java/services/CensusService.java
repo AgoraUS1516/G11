@@ -418,6 +418,7 @@ public class CensusService {
 	
 	//METODOS NUEVOS
 	
+	//Censos que un usuario puede borrar
 	public Collection<Census> canDelete(String username){
 		Collection<Census> result;
 		Collection<Census> aux;
@@ -435,6 +436,7 @@ public class CensusService {
 		return result;
 	}
 	
+	//Censos donde se encuentra una persona
 	public Collection<Census> allCensusForPerson(String username){
 		Collection<Census> result;
 		Collection<Census> aux;
@@ -455,6 +457,7 @@ public class CensusService {
 		return result;
 	}
 	
+	//Censos donde un usuario puede votar
 	public Collection<Census> allCensusCanVote(String username){
 		Collection<Census> result;
 		Collection<Census> aux;
@@ -475,6 +478,7 @@ public class CensusService {
 		return result;
 	}
 	
+	//Usuarios que ya han votado para una votación
 	public Collection<String> findPeopleWhoHasVoted(int idVotacion){
 		Collection<String> res = new ArrayList<String>();
 		//Obtenemos el Censo de la votación
@@ -490,6 +494,7 @@ public class CensusService {
 		return res;
 	}
 	
+	//Usuarios que no han votado para una votación
 	public Collection<String> findPeopleWhoHasNotVoted(int idVotacion){
 		Collection<String> res = new ArrayList<String>();
 		//Obtenemos el Censo de la votación
