@@ -667,5 +667,16 @@ public class CensusService {
 	
 	return CensusWithoutDeletedUsers;
 	}
+	
+	// Metodo mediante el cual se puede añadir una lista de personas a un censo
+		public void addListToCensus(int idVotacion, String creator, Collection<String> users){
+			Census c = censusRepository.findCensusByVote(idVotacion);
+			int cId = c.getId();
+			Assert.isTrue(c.getUsername().equals(creator));
+			
+			for(String name: users){
+				addUserToCensus(cId, creator, name);
+			}
+		}
 }
 
