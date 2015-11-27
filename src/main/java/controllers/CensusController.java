@@ -389,6 +389,20 @@ public class CensusController extends AbstractController {
 			}
 			return result;
 		}
-
+		
+		//Añade los usuarios de otro censo al censo actual
+		@RequestMapping(value = "/addUsersOldCensus", method = RequestMethod.GET)
+		public ModelAndView addOldCensus(@RequestParam int censusId, @CookieValue("user") String username, @RequestParam int oldCensusId){
+			ModelAndView result = new ModelAndView("census/misVotaciones");
+			try{
+				censusService.addOldCensus(censusId, username, oldCensusId);
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+			}catch(Exception oops){
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+				result.addObject("message", "No se pudieron añadir los usuarios");
+				oops.getStackTrace();
+			}
+			return result;
+		}
 }	
 	
