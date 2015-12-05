@@ -20,7 +20,8 @@
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ADMCensus" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ADMCensus" /> 
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql42611-admcensus.whelastic.net/:3306/ADMCensus" /> -->
 			<property name="javax.persistence.jdbc.user" value="acme-manager" />
 			<property name="javax.persistence.jdbc.password" value="ACME-M@n@ger-6874" />
 

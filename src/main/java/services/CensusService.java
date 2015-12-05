@@ -457,7 +457,7 @@ public class CensusService {
 		return result;
 	}
 	
-	//Censos donde un usuario puede votar
+	//Censos donde el usuario aún no ha votado
 	public Collection<Census> allCensusCanVote(String username){
 		Collection<Census> result;
 		Collection<Census> aux;
@@ -565,8 +565,8 @@ public class CensusService {
 		return result;
 	}
 	
-	//Devolveremos los censos que cumplen un porcentaje entre 0 y 1. Si nuestro boleano es true devolvera censos mayores que el porcentaje, si es false dara
-	//los inferiores
+	//Devolveremos los censos que cumplen un porcentaje entre 0 y 1. 
+	//Si nuestro boleano es true devolvera censos mayores que el porcentaje, si es false dara los inferiores
 	public Collection<Census> censusInThePercentaje(double percentaje,boolean superior){
 		Collection<Census> res = new ArrayList<Census>();
 		Collection<Census> allCensus = findAll();

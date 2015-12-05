@@ -26,7 +26,8 @@
 	<jpa:repositories base-package="security" />
 
 	<!-- Data source -->
-
+	
+	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
@@ -34,7 +35,17 @@
 		<property name="user" value="acme-user" />
 		<property name="password" value="ACME-Us3r-P@ssw0rd" />
 	</bean>
-
+	
+	
+	<!--
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://mysql42611-admcensus.whelastic.net:3306/ADMCensus" />
+		<property name="user" value="acme-user" />
+		<property name="password" value="ACME-Us3r-P@ssw0rd" />
+	</bean>
+	-->
 	<!-- JPA -->
 
 	<bean id="persistenceUnit" class="java.lang.String">
