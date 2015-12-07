@@ -658,7 +658,7 @@ public class CensusService {
 	}
 	
 	//Despues del for la lista de censusAllUsers ya no contiene a todos los usuarios
-	CensusWithoutDeletedUsers = censusAllUsers;
+	CensusWithoutDeletedUsers = save(censusAllUsers);
 	
 	return CensusWithoutDeletedUsers;
 	}
