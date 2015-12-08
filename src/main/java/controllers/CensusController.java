@@ -374,6 +374,35 @@ public class CensusController extends AbstractController {
 	public @ResponseBody Census deleteAllUsersFromAList(@RequestParam int idVotacion, @RequestParam Collection<String> usersToDelete){
 		return censusService.deleteAllUsersFromAList(idVotacion,usersToDelete);
 	}
-
+	
+	//Añade una lista de usuarios
+		@RequestMapping(value = "/addListUsers", method = RequestMethod.GET)
+		public ModelAndView addListUsers(@RequestParam int censusId, @CookieValue("user") String username, @RequestParam Collection<String> users){
+			ModelAndView result = new ModelAndView("census/misVotaciones");
+			try{
+				censusService.addListToCensus(censusId, username, users);
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+			}catch(Exception oops){
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+				result.addObject("message", "No se pudieron añadir los usuarios");
+				oops.getStackTrace();
+			}
+			return result;
+		}
+		
+		//Añade los usuarios de otro censo al censo actual
+		@RequestMapping(value = "/addUsersOldCensus", method = RequestMethod.GET)
+		public ModelAndView addOldCensus(@RequestParam int censusId, @CookieValue("user") String username, @RequestParam int oldCensusId){
+			ModelAndView result = new ModelAndView("census/misVotaciones");
+			try{
+				censusService.addOldCensus(censusId, username, oldCensusId);
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+			}catch(Exception oops){
+				result = new ModelAndView("redirect:/census/edit.do?censusId="+censusId);
+				result.addObject("message", "No se pudieron añadir los usuarios");
+				oops.getStackTrace();
+			}
+			return result;
+		}
 }	
 	

@@ -12,6 +12,7 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%Cookie miCookie= new Cookie("user","juan22");%>
 
 
 <div id="cssmenu">

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -667,5 +668,31 @@ public class CensusService {
 	
 	return CensusWithoutDeletedUsers;
 	}
+	
+	// Metodo mediante el cual se puede añadir una lista de personas a un censo
+		public void addListToCensus(int idVotacion, String creator, Collection<String> users){
+			Census c = censusRepository.findCensusByVote(idVotacion);
+			int cId = c.getId();
+			Assert.isTrue(c.getUsername().equals(creator));
+			
+			for(String name: users){
+				addUserToCensus(cId, creator, name);
+			}
+		}
+		
+		// Metodo mediante el cual se coje un censo de una votacion anterior y se usa para una nueva votacion
+		public void addOldCensus(int idVotacion, String creator, int idOldVotacion){
+			Census c = censusRepository.findCensusByVote(idVotacion);
+			Census cOld = censusRepository.findCensusByVote(idOldVotacion);
+			Assert.isTrue(c.getUsername().equals(creator));
+			Assert.isTrue(cOld.getUsername().equals(creator));
+			
+			
+			Set<String> users = cOld.getVoto_por_usuario().keySet();
+			
+			for(String name:users){
+				addUserToCensus(c.getId(), creator, name);
+			}
+		}
 }
 
