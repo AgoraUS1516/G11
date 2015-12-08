@@ -84,6 +84,19 @@
 					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>com.jelastic</groupId>
+				<artifactId>jelastic-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<email>maq_1993@hotmail.com</email>
+					<password>mi31a05q93</password>
+					<context>ROOT</context>
+					<environment>admcensus</environment>
+					<api_hoster>admcensus.whelastic.net</api_hoster>
+				</configuration>
+			</plugin>
 
 		</plugins>
 	</build>
